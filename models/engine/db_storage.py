@@ -2,7 +2,7 @@
 """
 Contains the class DBStorage
 """
-
+import inspect
 import models
 from models.amenity import Amenity
 from models.base_model import BaseModel, Base
@@ -50,6 +50,21 @@ class DBStorage:
                     key = obj.__class__.__name__ + '.' + obj.id
                     new_dict[key] = obj
         return (new_dict)
+
+    def get(self, cls, id):
+        """returns the object based on the class and its ID, or None if not found"""
+        obj = self.all(cls.id)
+        for elements, val in obj.items():
+            if elements.split(':')[1] == id:
+                print(inspect.getsource(elements))
+            else:
+                raise TypeError('none')
+            pass
+
+    def count(self, cls=None):
+        """"Returns the number of objects in storage matching the given class"""
+        obj = self.all(cls)
+        return len(obj)
 
     def new(self, obj):
         """add the object to the current database session"""
