@@ -2,7 +2,7 @@
 """
 Contains the FileStorage class
 """
-
+import inspect
 import json
 from models.amenity import Amenity
 from models.base_model import BaseModel
@@ -33,6 +33,21 @@ class FileStorage:
                     new_dict[key] = value
             return new_dict
         return self.__objects
+
+    def get(self, cls, id):
+        """returns the object based on the class and its ID, or None if not found"""
+        obj = self.all(cls.id)
+        for elements, val in obj.items():
+            if elements.split(':')[1] == id:
+                print(inspect.getsource(elements))
+            else:
+                raise TypeError('none')
+            pass
+
+    def count(self, cls=None):
+        """"Returns the number of objects in storage matching the given class"""
+        obj = self.all(cls)
+        return len(obj)
 
     def new(self, obj):
         """sets in __objects the obj with key <obj class name>.id"""
