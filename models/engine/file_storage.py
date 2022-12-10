@@ -40,8 +40,7 @@ class FileStorage:
             if (elements.id == id):
                 return elements
             else:
-                raise TypeError('none')
-            pass
+                return None
 
     def count(self, cls=None):
         """"Returns the number of objects in storage matching the given class"""
