@@ -2,8 +2,6 @@
 """
 Contains the class DBStorage
 """
-import inspect
-import models
 from models.amenity import Amenity
 from models.base_model import BaseModel, Base
 from models.city import City
@@ -53,10 +51,10 @@ class DBStorage:
 
     def get(self, cls, id):
         """returns the object based on the class and its ID, or None if not found"""
-        obj = self.all(cls.id)
-        for elements, val in obj.items():
-            if elements.split(':')[1] == id:
-                print(inspect.getsource(elements))
+        obj = self.all(cls)
+        for elements in obj.values():
+            if (elements.id == id):
+                return elements
             else:
                 raise TypeError('none')
             pass
@@ -82,7 +80,8 @@ class DBStorage:
     def reload(self):
         """reloads data from the database"""
         Base.metadata.create_all(self.__engine)
-        sess_factory = sessionmaker(bind=self.__engine, expire_on_commit=False)
+        sess_factory = sessionmaker(
+            bind=self.__engine, expire_on_commit=False)
         Session = scoped_session(sess_factory)
         self.__session = Session
 
