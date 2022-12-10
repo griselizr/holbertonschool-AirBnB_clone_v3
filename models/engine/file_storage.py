@@ -35,7 +35,7 @@ class FileStorage:
 
     def get(self, cls, id):
         """returns the object based on the class and its ID, or None if not found"""
-        obj = self.all(cls.id)
+        obj = self.all(cls)
         for elements in obj.values():
             if (elements.id == id):
                 return elements
