@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 """Contains app-flask and endpoints (routes)"""
+
+
 from flask import Flask, Blueprint, abort
 from flask import render_template, jsonify
 from flask import make_response
@@ -17,12 +19,14 @@ CORS(app, resources={r"/*": {"origins": "0.0.0.0"}})
 @app.errorhandler(404)
 def invalid_route(e):
     """ Return a 404 error message """
+
     return (jsonify({"error": "Not found"}), 404)
 
 
 @app.teardown_appcontext
 def storage_close(issue):
     """calls storage.close()"""
+
     storage.close()
 
 
