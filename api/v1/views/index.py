@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 """ View index: status message"""
+
+
 import models
 from flask import Flask, Blueprint, jsonify
 from api.v1.views import app_views
@@ -15,6 +17,7 @@ def _status():
 @app_views.route('/stats', strict_slashes=False)
 def count():
     """ Returns count of objects by type """
+
     utilities_dic = {}
 
     classes = {
