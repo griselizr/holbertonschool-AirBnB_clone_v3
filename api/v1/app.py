@@ -16,6 +16,7 @@ CORS(app, resources={r"/*": {"origins": "0.0.0.0"}})
 
 @app.errorhandler(404)
 def invalid_route(e):
+    """ Return a 404 error message """
     return (jsonify({"error": "Not found"}), 404)
 
 
