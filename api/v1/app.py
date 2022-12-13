@@ -1,25 +1,20 @@
 #!/usr/bin/python3
 """Contains app-flask and endpoints (routes)"""
-
-
-from flask import Flask, Blueprint, abort
-from flask import render_template, jsonify
-from flask import make_response
-from flask import CORS
-import os
-from models import storage
+from flask import Flask, jsonify
 from api.v1 import app_views
+from models import storage
+from flask import Blueprint
+import os
+from flask import CORS
 
 
 app = Flask(__name__)
 app.register_blueprint(app_views)
-CORS(app, resources={r"/*": {"origins": "0.0.0.0"}})
+cors = CORS(app, resources={r"/*": {"origins": "0.0.0.0"}})
 
 
 @app.errorhandler(404)
-def invalid_route(e):
-    """ Return a 404 error message """
-
+def invalid_route(error):
     return (jsonify({"error": "Not found"}), 404)
 
 
