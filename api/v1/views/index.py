@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 """ View index: status message"""
 
+
+from models import storage
 from flask import Flask, Blueprint, jsonify
 from api.v1.views import app_views
 
